@@ -107,42 +107,44 @@ class _SelectionDialogState extends State<SelectionDialog> {
                   ),
                 ),
               Expanded(
-                child: ListView(
-                  children: [
-                    widget.favoriteElements.isEmpty
-                        ? const DecoratedBox(decoration: BoxDecoration())
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ...widget.favoriteElements.map(
-                                (f) => InkWell(
-                                  onTap: () {
-                                    _selectItem(f);
-                                  },
-                                  child: Padding(
-                                    padding: widget.dialogItemPadding,
-                                    child: _buildOption(f),
+                child: Scrollbar(
+                  child: ListView(
+                    children: [
+                      widget.favoriteElements.isEmpty
+                          ? const DecoratedBox(decoration: BoxDecoration())
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ...widget.favoriteElements.map(
+                                  (f) => InkWell(
+                                    onTap: () {
+                                      _selectItem(f);
+                                    },
+                                    child: Padding(
+                                      padding: widget.dialogItemPadding,
+                                      child: _buildOption(f),
+                                    )
                                   )
-                                )
-                              ),
-                              const Divider(),
-                            ],
-                          ),
-                    if (filteredElements.isEmpty)
-                      _buildEmptySearchWidget(context)
-                    else
-                      ...filteredElements.map(
-                        (e) => InkWell(
-                          onTap: () {
-                            _selectItem(e);
-                          },
-                          child: Padding(
-                          padding: widget.dialogItemPadding,
-                            child: _buildOption(e),
+                                ),
+                                const Divider(),
+                              ],
+                            ),
+                      if (filteredElements.isEmpty)
+                        _buildEmptySearchWidget(context)
+                      else
+                        ...filteredElements.map(
+                          (e) => InkWell(
+                            onTap: () {
+                              _selectItem(e);
+                            },
+                            child: Padding(
+                            padding: widget.dialogItemPadding,
+                              child: _buildOption(e),
+                            )
                           )
-                        )
-                      ),
-                  ],
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ],
