@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'country_code.dart';
@@ -107,7 +108,9 @@ class _SelectionDialogState extends State<SelectionDialog> {
                   ),
                 ),
               Expanded(
-                child: Scrollbar(
+                child:Scrollbar(
+                  trackVisibility: true,
+                  thumbVisibility: true,
                   child: ListView(
                     children: [
                       widget.favoriteElements.isEmpty
