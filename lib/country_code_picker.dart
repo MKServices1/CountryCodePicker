@@ -299,8 +299,9 @@ class CountryCodePickerState extends State<CountryCodePicker> {
       barrierColor: widget.barrierColor ?? Colors.grey.withOpacity(0.5),
       context: context,
       builder: (context) => Center(
-        child: Dialog(
-          child: SelectionDialog(
+        child: AlertDialog(
+          backgroundColor: const Color(0xFF2D2E2F),elevation: 0,
+          content: SelectionDialog(
             elements,
             favoriteElements,
             showCountryOnly: widget.showCountryOnly,

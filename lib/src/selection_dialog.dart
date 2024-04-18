@@ -54,8 +54,8 @@ class SelectionDialog extends StatefulWidget {
     this.closeIcon,
     this.dialogItemPadding = const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
     this.searchPadding = const EdgeInsets.symmetric(horizontal: 24),
-  })  : searchDecoration = searchDecoration.prefixIcon == null
-            ? searchDecoration.copyWith(prefixIcon: const Icon(Icons.search))
+  })  : searchDecoration = searchDecoration.suffixIcon == null
+            ? searchDecoration.copyWith(suffixIcon: const Icon(Icons.search))
             : searchDecoration,
         super(key: key);
 
@@ -72,33 +72,30 @@ class _SelectionDialogState extends State<SelectionDialog> {
         padding: const EdgeInsets.all(0.0),
         child: Container(
           clipBehavior: Clip.hardEdge,
-          width: widget.size?.width ?? MediaQuery.of(context).size.width,
+          width: 150,
           height:
-              widget.size?.height ?? MediaQuery.of(context).size.height * 0.85,
+              widget.size?.height ?? MediaQuery.of(context).size.height * 0.58,
           decoration: widget.boxDecoration ??
               BoxDecoration(
-                color: widget.backgroundColor ?? Colors.white,
+                color: widget.backgroundColor ?? const Color(0xFF2D2E2F),
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 boxShadow: [
-                  BoxShadow(
-                    color: widget.barrierColor ?? Colors.grey.withOpacity(1),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3), // changes position of shadow
-                  ),
                 ],
               ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               if (!widget.hideCloseIcon)
-              IconButton(
-                padding: const EdgeInsets.all(0),
-                iconSize: 20,
-                icon: widget.closeIcon!,
-                onPressed: () => Navigator.pop(context),
-              ),
+                Center(
+                  child: Container(
+                    width: 30,height: 3,
+                    decoration: const BoxDecoration(
+                      color:Color(0xFFE6E6E6),
+                      borderRadius:  BorderRadius.all(Radius.circular(100.0),),
+                    ),
+                  ),
+                ),
               if (!widget.hideSearch)
                 Padding(
                   padding: widget.searchPadding,
