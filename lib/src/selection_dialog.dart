@@ -96,9 +96,10 @@ class _SelectionDialogState extends State<SelectionDialog> {
                     ),
                   ),
                 ),
+              const SizedBox(height: 5,),
               if (!widget.hideSearch)
                 Padding(
-                  padding: widget.searchPadding,
+                  padding:const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
                   child: TextField(
                     style: widget.searchStyle,
                     decoration: widget.searchDecoration,
