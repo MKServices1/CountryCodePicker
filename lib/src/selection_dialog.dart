@@ -73,7 +73,7 @@ class _SelectionDialogState extends State<SelectionDialog> {
         padding: const EdgeInsets.all(0.0),
         child: Container(
           clipBehavior: Clip.hardEdge,
-          width: 150,
+          width: 90,
           height:
               widget.size?.height ?? MediaQuery.of(context).size.height * 0.58,
           decoration: widget.boxDecoration ??
@@ -212,9 +212,10 @@ class _SelectionDialogState extends State<SelectionDialog> {
     setState(() {
       filteredElements = widget.elements
           .where((e) =>
-              e.code!.contains(s) ||
-              e.dialCode!.contains(s) ||
-              e.name!.toUpperCase().contains(s))
+              // e.code!.contains(s) ||
+              e.dialCode!.contains(s)// ||
+              // e.name!.toUpperCase().contains(s)
+      )
           .toList();
     });
   }
