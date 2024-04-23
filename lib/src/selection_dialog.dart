@@ -69,91 +69,88 @@ class _SelectionDialogState extends State<SelectionDialog> {
   late List<CountryCode> filteredElements;
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: Container(
-          clipBehavior: Clip.hardEdge,
-          width: 90,
-          height:
-              widget.size?.height ?? MediaQuery.of(context).size.height * 0.58,
-          decoration: widget.boxDecoration ??
-              BoxDecoration(
-                color: widget.backgroundColor ?? const Color(0xFF2D2E2F),
-                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                boxShadow: [
-                ],
+  Widget build(BuildContext context) => Container(
+    clipBehavior: Clip.hardEdge,
+    width: 90,
+    height:
+        widget.size?.height ?? MediaQuery.of(context).size.height * 0.58,
+    decoration: widget.boxDecoration ??
+        BoxDecoration(
+          color: widget.backgroundColor ?? const Color(0xFF2D2E2F),
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+          boxShadow: [
+          ],
+        ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        if (!widget.hideCloseIcon)
+          Center(
+            child: Container(
+              width: 30,height: 3,
+              decoration: const BoxDecoration(
+                color:Color(0xFFE6E6E6),
+                borderRadius:  BorderRadius.all(Radius.circular(100.0),),
               ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              if (!widget.hideCloseIcon)
-                Center(
-                  child: Container(
-                    width: 30,height: 3,
-                    decoration: const BoxDecoration(
-                      color:Color(0xFFE6E6E6),
-                      borderRadius:  BorderRadius.all(Radius.circular(100.0),),
-                    ),
-                  ),
-                ),
-              const SizedBox(height: 10,),
-              if (!widget.hideSearch)
-                Padding(
-                  padding:const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-                  child: TextField(
-                    style: widget.searchStyle,
-                    decoration: widget.searchDecoration,
-                    onChanged: _filterElements,
-                  ),
-                ),
-              Expanded(
-                child:Scrollbar(
-                  trackVisibility: true,
-                  thumbVisibility: true,
-                  child: ListView(
-                    children: [
-                      widget.favoriteElements.isEmpty
-                          ? const DecoratedBox(decoration: BoxDecoration())
-                          : Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ...widget.favoriteElements.map(
-                                  (f) => InkWell(
-                                    onTap: () {
-                                      _selectItem(f);
-                                    },
-                                    child: Padding(
-                                      padding: widget.dialogItemPadding,
-                                      child: _buildOption(f),
-                                    )
-                                  )
-                                ),
-                                const Divider(),
-                              ],
-                            ),
-                      if (filteredElements.isEmpty)
-                        _buildEmptySearchWidget(context)
-                      else
-                        ...filteredElements.map(
-                          (e) => InkWell(
-                            onTap: () {
-                              _selectItem(e);
-                            },
-                            child: Padding(
-                            padding: widget.dialogItemPadding,
-                              child: _buildOption(e),
+            ),
+          ),
+        const SizedBox(height: 10,),
+        if (!widget.hideSearch)
+          Padding(
+            padding:const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+            child: TextField(
+              style: widget.searchStyle,
+              decoration: widget.searchDecoration,
+              onChanged: _filterElements,
+            ),
+          ),
+        Expanded(
+          child:Scrollbar(
+            trackVisibility: true,
+            thumbVisibility: true,
+            child: ListView(
+              children: [
+                widget.favoriteElements.isEmpty
+                    ? const DecoratedBox(decoration: BoxDecoration())
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ...widget.favoriteElements.map(
+                            (f) => InkWell(
+                              onTap: () {
+                                _selectItem(f);
+                              },
+                              child: Padding(
+                                padding: widget.dialogItemPadding,
+                                child: _buildOption(f),
+                              )
                             )
-                          )
-                        ),
-                    ],
+                          ),
+                          const Divider(),
+                        ],
+                      ),
+                if (filteredElements.isEmpty)
+                  _buildEmptySearchWidget(context)
+                else
+                  ...filteredElements.map(
+                    (e) => InkWell(
+                      onTap: () {
+                        _selectItem(e);
+                      },
+                      child: Padding(
+                      padding: widget.dialogItemPadding,
+                        child: _buildOption(e),
+                      )
+                    )
                   ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      );
+      ],
+    ),
+  );
 
   Widget _buildOption(CountryCode e) {
     return SizedBox(
